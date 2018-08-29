@@ -1,0 +1,106 @@
+% ------------------------------------------------------ %
+% Gabarit d'article pour la revue L'Actualité économique %
+% ------------------------------------------------------ %
+\documentclass[10pt,twoside,fleqn,english,french]{actuecon}
+
+% ------------------------------------------------------- %
+% Packages requis					 					  %
+% ------------------------------------------------------- %
+% La classe actuecon utilise déjà les packages suivants : %
+%														  %
+% - inputenc											  %
+% - fontenc												  %
+% - natbib												  %
+% - babel												  %
+% - etoolbox											  %
+% - geometry											  %
+% - fancyhdr											  %
+% - titlesec											  %
+% - titling												  %
+% - authblk												  %
+% - amsmath												  %
+% - amsfonts											  %
+% - mathptmx											  %
+% - graphicx											  %
+% - caption												  %
+% - changes												  %
+%														  %
+% Il n'est pas nécessaire de les charger à nouveau.		  %
+% ------------------------------------------------------- %
+	
+% AUTEURS : INSÉREZ VOS PACKAGES ICI
+
+% ------------------------ %
+% Métadonnées de l'article %
+% ------------------------ %
+
+% AUTEURS : SAISISSEZ LES INFORMATIONS CI-DESSOUS
+% Vous pouvez insérer autant de \author et de \affil que
+% ce qui est nécessaire.
+
+\AEtitre{Titre de l'article}
+\author{Premier Auteur}
+\affil{Affiliation du premier auteur}
+\author{Deuxième Auteur}
+\affil{Affiliation du deuxième auteur}
+
+% PERSONNEL DE LA REVUE : SAISISSEZ LES INFORMATIONS CI-DESSOUS
+
+% Volume de la revue
+\AEvolume{}
+% Numéro de la revue
+\AEnumero{}
+% Date de parution de la revue
+\AEdateParution{}
+\date{} % À LAISSER VIDE!
+
+% RÉVISEURS : SAISISSEZ VOTRE NOM ET VOS INITIALES
+\AEreviseur{Nom Complet}{initiales}
+
+\begin{document}
+	
+	% PERSONNEL DE LA REVUE : SAISISSEZ LE NUMÉRO DE LA PREMIÈRE PAGE DE L'ARTICLE
+	\setcounter{page}{3}
+	
+	% Génération de la section du titre de l'article
+	\maketitle
+	% Première page non numérotée et sans entête	
+	\thispagestyle{empty}			
+	
+	% Résumé français de l'article
+	\begin{AEresume}
+		% Rédigez votre résumé français ici. 
+	\end{AEresume}
+
+	% Article's english abstract
+	\begin{AEabstract}
+		% Rédigez votre résumé anglais ici.
+	\end{AEabstract}
+
+	% Introduction de l'article
+	\AEintroduction
+	
+		% Rédigez votre introduction ici.
+		       	
+	% Sections de développement
+	\AEsectionsDeveloppement
+	
+		\section{Une section}
+		
+		\subsection{Une sous-section}
+								 
+		\subsubsection{Une sous-sous-section}
+				
+	% Conclusion de l'article
+	\AEconclusion
+	
+		% Rédigez votre conclusion ici.
+									
+	% Section bibliographie
+	\AEbibliographie
+	% Style bibliographique
+	\bibliographystyle{econometrica-fr}
+	% Fichier .bib contenant les références
+	\bibliography{bibliographie}
+		
+\end{document}

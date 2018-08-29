@@ -1,0 +1,106 @@
+% --------------------------------------------------- %
+% Journal article template for L'Actualité économique %
+% --------------------------------------------------- %
+\documentclass[10pt,twoside,fleqn,french,english]{actuecon}
+
+% -------------------------------------------------------- %
+% Required Packages					 					   %
+% -------------------------------------------------------- %
+% The actuecon class already loads the following packages: %
+%														   %
+% - inputenc											   %
+% - fontenc												   %
+% - natbib												   %
+% - babel												   %
+% - etoolbox											   %
+% - geometry											   %
+% - fancyhdr											   %
+% - titlesec											   %
+% - titling												   %
+% - authblk												   %
+% - amsmath												   %
+% - amsfonts											   %
+% - mathptmx											   %
+% - graphicx											   %
+% - caption												   %
+% - changes												   %
+%														   %
+% There is no need to load them hereafter.				   %
+% -------------------------------------------------------- %
+	
+% AUTHORS: INSERT YOUR PACKAGES HERE
+
+% ---------------- %
+% Article metadata %
+% ---------------- %
+
+% AUTHORS : PLEASE FILL THE INFORMATIONS BELOW
+% You can insert as many \author and \affil commands as
+% is necessary.
+
+\AEtitre{Article Title}
+\author{First Author}
+\affil{First Author's Affiliation}
+\author{Second Author}
+\affil{Second Author's Affiliation}
+
+% JOURNAL STAFF: PLEASE FILL THE INFORMATIONS BELOW
+
+% Journal Volume
+\AEvolume{}
+% Issue Number
+\AEnumero{}
+% Journal Issue Date
+\AEdateParution{}
+\date{} % LEAVE EMPTY!
+
+% REVISERS: WRITE YOUR FULL NAME AND INITIALS
+\AEreviseur{Full Name}{initials}
+
+\begin{document}
+	
+	% JOURNAL STAFF: WRITE THE ARTICLE'S FIRST PAGE NUMBER
+	\setcounter{page}{3}
+	
+	% Article title generation
+	\maketitle
+	% The first page doesn't have a page number nor a header	
+	\thispagestyle{empty}			
+	
+	% Article's french abstract
+	\begin{AEresume}
+		% Write your french abstract here.
+	\end{AEresume}
+
+	% Article's english abstract
+	\begin{AEabstract}
+		% Write your english abstract here.
+	\end{AEabstract}
+
+	% Article's introduction
+	\AEintroduction
+	
+		% Write your introduction here.
+		       	
+	% Article's main matter
+	\AEsectionsDeveloppement
+	
+		\section{A section}
+						
+		\subsection{A subsection}
+								 
+		\subsubsection{A subsubsection}
+				
+	% Article's conclusion
+	\AEconclusion
+	
+		% Write your conclusion here.
+							
+	% Bibliography
+	\AEbibliographie
+	% Bibliography style
+	\bibliographystyle{econometrica}
+	% .bib file
+	\bibliography{bibliographie}
+		
+\end{document}

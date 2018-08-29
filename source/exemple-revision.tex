@@ -1,0 +1,355 @@
+% -------------------------------------------------------- %
+% Gabarit d'article pour la revue L'Actualité économique / %
+% Article template for the L'actualité économique journal  %
+% -------------------------------------------------------- %
+\documentclass[10pt,twoside,fleqn,english,french]{article}
+
+% ----------------------------------- %
+% Packages requis / Required packages %
+% ----------------------------------- %
+
+% Encodage des caractères en UTF-8
+\usepackage[utf8]{inputenc}	
+% Utilisation des polices T1		
+\usepackage[T1]{fontenc}
+% Citations au format auteur-année				
+\usepackage{natbib}
+% Internationalisation						
+\usepackage{babel}
+% Nécessaire pour hacker \maketitle						
+\usepackage{etoolbox}
+% Mise en page					
+\usepackage{geometry}
+% Entêtes et pieds de pages personnalisés					
+\usepackage{fancyhdr}
+% Titres de section personnalisés					
+\usepackage{titlesec}
+% Nécessaire pour hacker \maketitle (à insérer avant authblk)					
+\usepackage{titling}
+% Nécessaire pour hacker \maketitle					
+\usepackage[blocks,affil-it]{authblk}
+% Requis pour les équations
+\usepackage{amsmath}
+% Polices de caractères pour les maths					
+\usepackage{amsfonts}
+% Police Times avec symboles mathématiques
+\usepackage{mathptmx}
+% Nécessaire pour les graphiques et images					
+\usepackage{graphicx}
+% Descriptions de graphiques et tableaux personnalisées
+\usepackage[format=plain,%
+			labelsep=newline,%
+			textfont=sc,%
+			aboveskip=12pt,%
+			position=top]{caption}
+% Révision des manuscrits
+\usepackage{changes}
+			
+% AUTEURS : INSÉREZ VOS PACKAGES ICI
+% AUTHORS : INSERT YOUR PACKAGES HERE		
+
+% ---------------------- %
+% Mise en page / Layout  %
+% ---------------------- %
+\geometry{papersize={6.25in,9.5in},
+		nomarginpar,
+		includehead,
+		nofoot,
+		hdivide={0.875in,*,0.875in},
+		vdivide={63pt,*,0.7917in},
+		headsep=0.25in,
+		headheight=9pt}					% Format de page
+\setlength{\parindent}{15pt}			% Indentation des premières lignes de paragraphes
+\setlength{\parskip}{6pt}				% Espacement entre les paragraphes
+\setlength{\mathindent}{15pt}			% Indentation des équations
+\setlength{\affilsep}{0pt}				% Espacement entre l'auteur et son affiliation
+
+% Reformatage de la taille de caractères \normalsize
+\makeatletter
+\g@addto@macro\normalsize{%
+	\setlength\abovedisplayskip{0pt}
+	\setlength\belowdisplayskip{0pt}
+	\setlength\abovedisplayshortskip{0pt}
+	\setlength\belowdisplayshortskip{0pt}
+}
+\makeatother
+
+% Formatage de la taille de caractères pour l'auteur
+\renewcommand{\Authfont}{\fontsize{10}{12}\selectfont}
+
+% ---------------------------------------------- %
+% Personnalisation des entêtes et pieds de pages %
+% ---------------------------------------------- %
+\pagestyle{fancy}
+\fancyhf{}
+% Entêtes
+\fancyhead[RO,LE]{\thepage}
+\fancyhead[CE]{\fontsize{7.5}{9}\selectfont\MakeUppercase{L'Actualité économique}}
+\fancyhead[CO]{\fontsize{7.5}{9}\selectfont\MakeUppercase{\AEINTtitre}}
+% Pieds de pages
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot{}
+\renewcommand{\footnoterule}{\noindent\rule[4pt]{48pt}{0.5pt}}
+
+% -------------------------------------- %
+% Options des packages / Package options %
+% -------------------------------------- %
+
+% caractères « et » sont les guillemets
+\frenchbsetup{%
+	og=«, fg=»                     
+}
+
+% Traductions françaises
+\addto\captionsfrench{%
+	\renewcommand{\figurename}{\MakeUppercase{Graphique}}
+	\renewcommand{\tablename}{\MakeUppercase{Tableau}}
+	\renewcommand{\refname}{BIBLIOGRAPHIE}
+}
+
+% Personnalisation de la section du titre de l'article
+\pretitle{\vspace{-42pt}
+			\AEentetePageTitre%
+			\begin{center}%
+			\fontsize{14}{16}\selectfont}
+\posttitle{\par\vspace{24pt}%
+			\end{center}}
+
+% ------------------ %
+% Hack de \maketitle %
+% ------------------ %
+\makeatletter
+% patch \maketitle so that it doesn't center
+\patchcmd{\@maketitle}{center}{flushleft}{}{}
+\patchcmd{\@maketitle}{center}{flushleft}{}{}
+% patch the patch by authblk so that the author block is flush left
+\def\maketitle{{%
+		\renewenvironment{tabular}[2][]
+		{\begin{flushleft}}
+			{\end{flushleft}}
+		\AB@maketitle}}
+\makeatother
+
+% ----------------------------------------- %
+% Commandes internes / Placeholder commands %
+% ----------------------------------------- %
+
+% Titre de l'article (pour l'entête)
+\newcommand{\AEINTtitre}{}
+% Volume de la revue (pour l'entête)
+\newcommand{\AEINTvolume}{}
+% Numéro de la revue (pour l'entête)
+\newcommand{\AEINTnumero}{}
+% Date de parution de la revue (pour l'entête)
+\newcommand{\AEINTdate}{}
+
+% ------------------------------------------ %
+% Commandes personnalisées / Custom commands %
+% ------------------------------------------ %
+
+% Titre de l'article
+\newcommand{\AEtitre}[1]{%
+	\title{\MakeUppercase{#1}}%
+	\renewcommand{\AEINTtitre}{#1}
+}
+
+% Volume de la revue
+\newcommand{\AEvolume}[1]{%
+	\renewcommand{\AEINTvolume}{#1}
+}
+
+% Numéro de la revue
+\newcommand{\AEnumero}[1]{%
+	\renewcommand{\AEINTnumero}{#1}
+}
+
+% Date de parution de la revue
+\newcommand{\AEdateParution}[1]{%
+	\renewcommand{\AEINTdate}{#1}
+}
+
+% Entête de la page titre
+\newcommand{\AEentetePageTitre}{%
+	\noindent{\fontsize{8}{10}\selectfont L'Actualité économique, Revue d'analyse économique, vol.~\AEINTvolume, n\textsuperscript{o}~\AEINTnumero, \AEINTdate}\\[9pt] % 9 + 6 + 16 = 31
+}
+
+% Section Introduction de l'article
+\newcommand{\AEintroduction}{%
+	\setcounter{secnumdepth}{0}
+	\titleformat{\section}%
+		{\fontsize{10}{12}\selectfont\scshape}%
+		{}{0pt}%
+		{}{}
+	\section{Introduction}
+}
+
+% Section Conclusion de l'article
+\newcommand{\AEconclusion}{%
+	\setcounter{secnumdepth}{0}
+	\titleformat{\section}%
+	{\fontsize{10}{12}\selectfont\scshape}%
+	{}{0pt}%
+	{}{}
+	\section{Conclusion}
+}
+
+% Sections de développement de l'article
+\newcommand{\AEsectionsDeveloppement}{%
+	\setcounter{secnumdepth}{3}
+	\titleformat{\section}%
+		{\fontsize{10}{12}\selectfont\scshape}%
+		{\thesection.}{6pt}%
+		{}{}
+	\titleformat{\subsection}%
+		{\fontsize{10}{12}\selectfont\itshape}%
+		{{\normalfont\thesubsection}}{6pt}%
+		{}{}
+	\titleformat{\subsubsection}%
+	{\fontsize{10}{12}\selectfont\itshape}%
+	{{\normalfont\thesubsubsection}}{6pt}%
+	{}{}
+}
+
+% Section Bibliographie de l'article
+\newcommand{\AEbibliographie}{%
+	\titleformat{\section}{\filcenter\scshape}{}{}{}{}
+}
+
+% Défition des réviseurs du manuscrit
+\newcommand{\AEreviseur}[2]{%
+	\definechangesauthor[name={#1}, color=red]{#2}
+}
+
+% --------------------------------------------------- %
+% Environnements personnalisés  / Custom environments %
+% --------------------------------------------------- %
+	
+% Résumé français
+\newenvironment{AEresume}%
+	{\fontsize{9}{11}\selectfont\noindent\textsc{Résumé} -- }%
+	{\par}
+	
+% Résumé anglais
+\newenvironment{AEabstract}%
+	{\fontsize{9}{11}\selectfont\noindent\textsc{Abstract} -- }%
+	{\par}
+
+% ------------------------------------------- %
+% Métadonnées de l'article / Article metadata %
+% ------------------------------------------- %
+
+% AUTEURS : SAISISSEZ LES INFORMATIONS CI-DESSOUS
+% AUTHORS : PLEASE FILL THE INFORMATIONS BELOW
+
+\AEtitre{Titre de l'article}
+\author{Premier Auteur}
+\affil{Affiliation du premier auteur}
+\author{Deuxième Auteur}
+\affil{Affiliation du deuxième auteur}
+
+% PERSONNEL DE LA REVUE : SAISISSEZ LES INFORMATIONS CI-DESSOUS
+% JOURNAL STAFF : PLEASE FILL THE INFORMATIONS BELOW
+
+% Volume de la revue
+\AEvolume{}
+% Numéro de la revue
+\AEnumero{}
+% Date de parution de la revue
+\AEdateParution{}
+\date{} % À LAISSER VIDE! / LEAVE EMPTY!
+
+% RÉVISEURS : SAISISSEZ VOTRE NOM ET VOS INITIALES
+\AEreviseur{Donald Trump}{DT}
+
+\begin{document}
+	
+	% PERSONNEL DE LA REVUE : SAISISSEZ LE NUMÉRO DE LA PREMIÈRE PAGE DE L'ARTICLE
+	% JOURNAL STAFF : FILL THE ARTICLE'S FIRST PAGE NUMBER
+	\setcounter{page}{3}
+	
+	% Génération de la section du titre de l'article
+	\maketitle
+	% Première page non numérotée et sans entête	
+	\thispagestyle{empty}			
+	
+	% Résumé français de l'article
+	\begin{AEresume}
+		During the campaign i promised to make america great again by bringing businesses and jobs back to our country. i am very proud to see companies like chrysler moving operations from mexico to michigan where there are so many great american workers!		 
+	\end{AEresume}
+
+	% Article's english abstract
+	\begin{AEabstract}
+		stock market just hit another record high! jobs looking very good. great book just out "a place called heaven" by dr. robert jeffress - a wonderful man!		
+	\end{AEabstract}
+
+	% Introduction de l'article
+	\AEintroduction
+	
+		the u.s. has gained more than 5.2 trillion dollars in stock market value since election day! also record business
+		enthusiasm. the issue of kneeling has nothing to do with race. it is about respect for our country flag and national
+		anthem. nfl must respect this! the fake news media will not talk about the importance of the united nations security
+		council's 15-0 vote in favor of sanctions on n. korea! the democrats should be ashamed. 
+		
+		this is a
+		disgrace! draintheswamp a working dinner tonight with prime minister abe of japan and his representatives at the winter
+		white house (mar-a-lago). very good talks! even those registered to vote who are dead (and many for a long time).
+		depending on results we will strengthen up voting procedures! thank you to ford for scrapping a new plant in mexico
+		and creating 700 new jobs in the u.s. this is just the beginning - much more to follow.
+		       	
+	% Sections de développement
+	\AEsectionsDeveloppement
+	
+		\section{Une première section}
+		
+		\subsection{Texte ajouté}
+		
+		A government shutdown will be devastating to our military...something the dems care very little about! yesterday was
+		another big day for jobs and the stock market. chrysler coming back to u.s. (michigan) from mexico and many more companies
+		paying out tax cut money to employees. if dems won in november market would have tanked! it was headed for disaster. on my
+		way to pensacola florida. \added[id=DT]{NO COLLUSION!} see everyone soon! maga china is sending an envoy and delegation to north korea - a big move
+		we'll see what happens!
+		 
+		\subsection{Texte supprimé}
+		
+		make america great again! the failing @nytimes in a story by peter baker should have mentioned the rapid terminations by
+		me of tpp and the paris accord and the fast.... stock market up 5 months in a row! i will be at the @usga uswomensopen in
+		bedminster nj tomorrow. big crowds expected and the women are playing great-should be very exciting! weeklyaddress?? just
+		arrived in taormina with @flotus melania. g7summit usa?? the reason i am staying in bedminster n. j. a beautiful
+		community is that staying in nyc is \deleted[id=DT]{much more expensive and} disruptive.
+		 
+		\subsection{Texte modifié}
+		
+		meetings! i am watching \replaced[id=DT]{@foxandfriends anchors saying that I'm a very stable genius. So true!}{the democrats trying to defend the "you can keep you doctor you can keep your plan and premiums will
+		go down" obamacare lie."} thank you @usnavy! usa obamacare will explode and we will all get together and piece together a
+		great healthcare plan for the people. do not worry! the fake news media is going crazy with their conspiracy theories and
+		blind hatred. @msnbc and @cnn are unwatchable. @foxandfriends is great! getting ready to deliver a very important decision!
+		8:00 p.m. before i or anyone saw the classified and/or highly confidential hacking intelligence report it was leaked out to
+		@nbcnews. so serious! with all that congress has to work on do they really have to make the weakening of the independent
+		ethics watchdog as unfair as it.
+		
+	% Conclusion de l'article
+	\AEconclusion
+	
+		I will be leaving for florida today to meet with some of the bravest people on earth - but people whose lives have been
+		totally shattered. am also working with congress on many fronts. congratulations to doug jones on a hard fought victory.
+		the write-in votes played a very big factor but a win is a win. the people of alabama are great and the republicans will
+		have another shot at this seat in a very short period of time. it never ends! we believe that every american should stand
+		for the national anthem and we proudly pledge allegiance to one nation under god!
+		
+		the united states has been reminded time
+		and again in recent years that economic security is not merely related to national security -economic security is national
+		security. it is vital to our national strength. apec2017 money pouring into insurance companies profits under the guise of
+		obamacare is over. they have made a fortune.dems must get smart and deal! sadly they and others are fake news and the public
+		is just beginning to figure it out! congress now has 6 months to legalize daca (something the obama administration was
+		unable to do). if they can't i will revisit this issue! we will remain fully engaged w/ open lines of communication as
+		hurricaneharvey makes landfall. america is w/ you! @govabbott @fema @dhsgov just arrived at camp david where i am
+		monitoring the path and doings of hurricane harvey (as it strengthens to a class 3).
+			
+	% Section bibliographie
+	\AEbibliographie
+	% Style bibliographique
+	\bibliographystyle{francais}
+	% Fichier .bib contenant les références
+	\bibliography{bibliographie}
+		
+\end{document}

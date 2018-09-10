@@ -1,0 +1,311 @@
+\documentclass[french]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{natbib}
+\usepackage{babel}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+\usepackage{enumitem}
+\usepackage{metalogo}
+\usepackage{framed}
+\usepackage{changes}
+\usepackage{hyperref}
+
+\setlength{\parskip}{1ex}
+
+\definecolor{shadecolor}{rgb}{0.93,0.97,0.99}
+
+\frenchbsetup{%
+	og=«,fg=»
+}
+
+\hypersetup{%
+	breaklinks=true,%
+	colorlinks=true,%
+	allcolors=blue
+}
+
+\newlist{repertoires}{itemize}{2}
+\setlist[repertoires]{label=\faIcon[regular]{folder-open}~}
+\newlist{fichiers}{itemize}{1}
+\setlist[fichiers]{label=\faIcon[regular]{file}~}
+
+\newcommand{\cmd}[1]{%
+	\texttt{\textbackslash#1\{\}}
+}
+\newcommand{\dec}[1]{%
+	\texttt{\textbackslash#1}
+}
+
+\newcommand{\lien}[2]{%
+	\href{#1}{#2 \faIcon{external-link-alt}}
+}
+
+\title{Gabarit pour les articles de la revue \emph{L'Actualité économique}}
+\author{Benoit Hamel \\ Bibliothèque, HEC Montréal}
+\date{\today}
+
+\definechangesauthor[color=red, name={Benoit Hamel}]{BH}
+
+\begin{document}
+	\maketitle
+	
+	\begin{abstract}
+		Cette documentation a pour but de présenter à tous ceux et celles qui auront à se servir du gabarit
+		les fonctionnalités comprises dans ce paquetage. Elle se divise en deux parties, en fonction du
+		niveau d'intervention de la personne dans le processus de rédaction.
+	\end{abstract}
+	
+	\tableofcontents
+		
+	\section{Pour les auteurs}
+		\label{sec:auteurs}		
+		
+		\subsection{Fichiers contenus dans le paquetage}
+		
+			À l'ouverture de l'archive, vous trouverez la structure suivante:
+			
+			\begin{repertoires}
+				\item \textbf{actuecon}
+				\begin{repertoires}
+					\item \textbf{doc}: répertoire contenant la documentation
+					\item \textbf{img}: répertoire pour l'insertion des graphiques et images
+				\end{repertoires}
+				\begin{fichiers}
+					\item \textbf{actuecon.cls}: fichier de la classe de document
+					\item \textbf{bibliographie.bib}: fichier des références bibliographiques
+					\item \textbf{econometrica.bst}: style bibliographique anglais
+					\item \textbf{econometrica-fr.bst}: style bibliographique français
+					\item \textbf{template-en.tex}: gabarit anglais
+					\item \textbf{template-fr.tex}: gabarit français
+				\end{fichiers}
+			\end{repertoires}
+		
+			L'utilisation du paquetage est fort simple:
+			
+			\begin{itemize}
+				\item Vous rédigez votre article dans le fichier gabarit correspondant à la langue de rédaction (\textbf{template-en.tex} ou \textbf{template-fr.tex});
+				\item Vous insérez vos références bibliographiques en format \textbf{Bib\TeX} dans le fichier \textbf{bibliographie.bib};
+				\item Vous insérez tous vos graphiques et images dans le répertoire \textbf{img/}.
+			\end{itemize}
+	
+		\subsection{Utilisation du fichier gabarit}
+		
+			La présente section explique en détails le gabarit, de la première à la (presque) dernière ligne.
+			
+			\subsubsection{La classe de document}
+			
+				Le gabarit utilise la classe de document \textbf{actuecon}, tel que vous pouvez le voir dans la
+				commande \cmd{documentclass}:
+				
+				\begin{shaded*}
+					\verb|\documentclass[10pt,twoside,fleqn,english,french]{actuecon}|
+				\end{shaded*}
+			
+				Cette classe, dérivée de la classe \textbf{article}, a été conçue pour respecter intégralement les
+				règles de présentation de la revue. Il est donc impératif que \textbf{vous ne modifiiez pas les options} de
+				la commande ci-dessus ni le contenu du fichier de class \textbf{actuecon.cls}.
+				
+			\subsubsection{Paquetages requis par la classe}
+			
+				Dans le préambule du gabarit, vous trouverez la liste des paquetages requis pour l'utilisation de
+				la classe de document \textbf{actuecon} et du gabarit. Ces paquetages sont \textbf{déjà chargés} dans
+				le fichier de classe. Il est donc inutile de les charger à nouveau dans le gabarit.
+				
+				Lorsque vous chargez d'autres paquetages pour vos besoins personnels, assu-rez-vous que ceux-ci soient
+				compatibles avec ceux de la classe.
+				
+			\subsubsection{Métadonnées de l'article}
+			
+				Les seules métadonnées que vous avez besoin de renseigner dans le gabarit sont le \textbf{titre} (commande
+				\cmd{AEtitre}) et la \textbf{liste des auteurs} (\cmd{author}) et de leur \textbf{affiliation} à une institution (commande
+				\cmd{affil}).
+				
+				Vous pouvez insérer autant d'auteurs et d'affiliations que nécessaire en vous assurant d'alterner les
+				commandes \cmd{author} et \cmd{affil}.
+				
+				Les autres métadonnées de l'article (volume, numéro, date de parution et noms des réviseurs) doivent
+				être saisies par le personnel de la revue.
+				
+			\subsubsection{Corps de l'article}
+			
+				Les différentes sections de l'article sont clairement identifiées à l'aide de commentaires. Rédigez
+				votre article en respectant les directives suivantes:
+				
+				\begin{itemize}
+					\item Rédigez vos \textbf{résumés}  français et anglais dans les environnements \texttt{AEresume} et
+						\texttt{AEabstract} respectivement.
+					\item Rédigez votre \textbf{introduction}, votre \textbf{développement} et votre \textbf{conclusion} dans les sections prévues
+						à cet effet en veillant à ne pas supprimer les commandes \dec{AEintroduction},
+						\dec{AEsectionsDeveloppement}, \dec{AEconclusion} et \dec{AEbibliographie}.
+					\item Dans la hiérarchie du sectionnement de l'article, ne descendez pas plus bas que la sous-sous-section.
+				\end{itemize}
+			
+			\subsubsection{Bibliographie}
+			
+				Le paquetage vient avec deux fichiers de styles bibliographiques : \textbf{econometrica.bst} et 
+				\textbf{econometrica-fr.bst}. Ceux-ci correspondent aux versions anglaise et française du style utilisé
+				par la revue pour la mise en forme des références bibliographiques. Vous devez donc obligatoirement utiliser
+				l'un ou l'autre des styles en fonction de la langue de rédaction.
+	
+	\section{Pour le personnel de la revue}
+		\label{sec:personnel}
+		
+		La présente section explique ce que le personnel de la revue doit faire afin de finaliser le manuscrit soumis
+		par un auteur.
+		
+		\subsection{La classe de document}
+		
+			Un choix «éditorial» a été fait de séparer le contenu du contenant pour le gabarit de la revue. Les probabilités
+			étant très grandes qu'un auteur ajoute ses propres paquetages, commandes et environnements, il importait de
+			séparer les personnalisations de celui-ci de celles de la revue, et ce, afin d'assurer la conservation de la mise en page de l'article.
+			
+			C'est pourquoi la classe de document \textbf{actuecon} a été créée : toute la mise en page de l'article s'y trouve.
+			
+			Un auteur n'aura donc qu'à fournir son fichier gabarit, son fichier de références et son dossier \texttt{img}
+			contenant ses images et graphiques comme fichiers sources et vous pourrez compiler son article à partir d'une
+			version «vanille» de la classe. Ce sera le moyen le plus simple de s'assurer que la mise en forme de l'article
+			respecte les règles.
+			
+		\subsection{Métadonnées de l'article}
+		
+			L'auteur du manuscrit ayant déjà fourni le titre et la liste des auteurs et affiliations de l'article, il ne vous
+			restera plus qu'à renseigner les métadonnées relatives au numéro de la revue dans lequel l'article sera publié.
+			
+			Dans le \textbf{préambule} du document principal, vous trouverez les commandes \cmd{AEvolume} et \cmd{AEnumero} dans
+			lesquelles vous devrez renseigner le \textbf{volume} et le \textbf{numéro} de la revue à paraître.
+			
+			La \textbf{date de parution} de la revue doit être inscrite dans la commande \cmd{AEdateParution}. Cette commande ne requiert
+			pas de
+			format de date particulière; il s'agit plutôt d'un «champ» en texte libre. Vous pouvez donc inscrire la date comme
+			vous l'entendez («mars-juin 2017», par exemple).
+			
+			La commande \cmd{date} doit \textbf{toujours rester vide}, et ce, afin d'empêcher l'affichage d'une date dans l'espace du
+			titre de l'article -- testez-le en inscrivant une date dans la commande pour voir ce que ça donnera si vous ne laissez
+			pas la commande vide.
+			
+			Dans le \textbf{corps du document}, vous devez inscrire le numéro de la \textbf{première page} de 
+			l'article à	l'intérieur de la commande \cmd{setcounter}, comme dans l'exemple ci-dessous.
+			
+			\begin{shaded*}
+				\begin{verbatim}
+					% Exemple d'article commençant à la page 3.
+					\setcounter{page}{3}
+				\end{verbatim}
+			\end{shaded*}
+			
+			Cela est nécessaire compte tenu du fait qu'il est très difficile de fusionner plusieurs documents \LaTeX\ rédigés par autant
+			d'auteurs différents dans un seul document sans que des problèmes de compatibilité surviennent. À la toute fin du processus de révision, chaque document devra donc être recompilé avec son numéro de première page définitive.
+			
+		\subsection{Révision d'un manuscrit}
+		
+			Les réviseurs doivent d'abord renseigner leur \textbf{nom} et leurs \textbf{initiales} dans la commande
+			\cmd{AEreviseur} dans le préambule du manuscrit, comme dans l'exemple ci-dessous. Vous pouvez ajouter autant
+			de réviseurs qu'il est nécessaire en ajoutant une commande \cmd{AEreviseur} pour chacun.
+			
+			\begin{shaded*}
+				\verb|\AEreviseur{Benoit Hamel}{BH}|
+			\end{shaded*}
+		
+			La révision se fait grâce au paquetage \LaTeX\ \emph{changes}. Il a été conçu pour copier le comportement de Microsoft Word dans la même situation. Vous pouvez lire la
+			\lien{http://mirrors.ctan.org/macros/latex/contrib/changes/changes.english.pdf}{documentation complète} du
+			paquetage si vous le désirez. 
+			
+			Dans le cadre de cette documentation, nous nous intéresserons à seulement trois commandes :
+			
+			\begin{itemize}
+				\item \dec{added} pour ajouter du texte;
+				\item \dec{deleted} pour supprimer du texte;
+				\item \dec{replaced} pour remplacer du texte.
+			\end{itemize}
+		
+			\subsubsection{Ajouter du texte}
+			
+				La commande \cmd{added} prend la forme suivante :
+				
+				\begin{shaded*}
+					\verb|\added[id=<initiales>, remark=<remarque>]{nouveau texte}|
+				\end{shaded*}
+			
+				Les initiales du réviseur et la remarque sont facultatives. Cependant, les initiales servent à l'identification
+				de l'intervenant dans le cas où il y a plusieurs réviseurs -- l'auteur du manuscrit peut d'ailleurs s'ajouter en
+				tant que «réviseur». La remarque, quant à elle, doit être courte. Le texte à ajouter est inscrit entre les accolades, comme dans l'exemple ci-dessous.
+				
+				\begin{shaded*}
+					\begin{verbatim}
+						Ad aliquet amet commodo convallis dictum dignissim eu facilisis 
+						faucibus fermentum hendrerit himenaeos inceptos massa ornare 
+						purus quis risus sapien senectus taciti tempor torquent turpis 
+						ultrices varius velit vestibulum.
+						\added[id=BH]{Alea jacta est!}
+					\end{verbatim}
+				\end{shaded*}
+			
+				\begin{leftbar}
+					Ad aliquet amet commodo convallis dictum dignissim eu facilisis 
+					faucibus fermentum hendrerit himenaeos inceptos massa ornare 
+					purus quis risus sapien senectus taciti tempor torquent turpis 
+					ultrices varius velit vestibulum.
+					\added[id=BH]{Alea jacta est!}
+				\end{leftbar}
+			
+			\subsubsection{Supprimer du texte}
+			
+				La commande \cmd{deleted} prend la forme suivante :
+				
+				\begin{shaded*}
+					\begin{verbatim}
+						\deleted[id=<initiales>, remark=<remarque>]{texte supprimé}
+					\end{verbatim}
+				\end{shaded*}
+			
+				Pour que la commande fonctionne convenablement, vous devez couper-coller le texte à supprimer
+				dans celle-ci, comme dans l'exemple ci-dessous:
+				
+				\begin{shaded*}
+					\begin{verbatim}
+						The \deleted[id=BH]{failing} @nytimes set \deleted[id=BH]{%
+						liddle'} Bob Corker up by recording his conversation. 
+						Was \deleted[id=BH]{made to sound} a fool and that's what 
+						I am dealing with!
+					\end{verbatim}
+				\end{shaded*}
+			
+				\begin{leftbar}
+					The \deleted[id=BH]{failing} @nytimes set \deleted[id=BH]{liddle'} Bob Corker 
+					up by recording his conversation. 
+					Was \deleted[id=BH]{made to sound} a fool and that's what 
+					I am dealing with!
+				\end{leftbar}
+			
+			\subsubsection{Remplacer du texte}
+			
+				La commande \cmd{replaced} prend la forme suivante :
+				
+				\begin{shaded*}
+					\begin{verbatim}
+						\replaced[id=<initiales>, remark=<remarque>]{nouveau texte}{%
+						    ancien texte}
+					\end{verbatim}
+				\end{shaded*}
+			
+				Tout comme la commande \cmd{deleted}, il faut couper-coller le texte à remplacer
+				dans la deuxième accolade et inscrire le nouveau texte dans la première. L'exemple
+				ci-dessous montre le résultat de son utilisation :
+				
+				\begin{shaded*}
+					\begin{verbatim}
+						Democrat congresswoman totally \replaced[id=BH]{quoted}{%
+						fabricated} what I said to the wife of a soldier who died
+						in action (and \replaced[id=BH]{she has}{I have} proof).
+					\end{verbatim}
+				\end{shaded*}
+			
+				\begin{leftbar}
+					Democrat congresswoman totally \replaced[id=BH]{quoted}{%
+					fabricated} what I said to the wife of a soldier who died
+					in action (and \replaced[id=BH]{she has}{I have} proof).
+				\end{leftbar}
+			
+\end{document}

@@ -1,0 +1,309 @@
+\documentclass[english]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{natbib}
+\usepackage{babel}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+\usepackage{enumitem}
+\usepackage{metalogo}
+\usepackage{framed}
+\usepackage{changes}
+\usepackage{hyperref}
+
+\setlength{\parskip}{1ex}
+
+\definecolor{shadecolor}{rgb}{0.93,0.97,0.99}
+
+\hypersetup{%
+	breaklinks=true,%
+	colorlinks=true,%
+	allcolors=blue
+}
+
+\newlist{repertoires}{itemize}{2}
+\setlist[repertoires]{label=\faIcon[regular]{folder-open}~}
+\newlist{fichiers}{itemize}{1}
+\setlist[fichiers]{label=\faIcon[regular]{file}~}
+
+\newcommand{\cmd}[1]{%
+	\texttt{\textbackslash#1\{\}}
+}
+\newcommand{\dec}[1]{%
+	\texttt{\textbackslash#1}
+}
+
+\newcommand{\lien}[2]{%
+	\href{#1}{#2 \faIcon{external-link-alt}}
+}
+
+\title{Journal Article Template for \emph{L'Actualité économique}}
+\author{Benoit Hamel \\ Library, HEC Montréal}
+\date{\today}
+
+\definechangesauthor[color=red, name={Benoit Hamel}]{BH}
+
+\begin{document}
+	\maketitle
+	
+	\begin{abstract}
+		The goal of this documentation is to explain the package's features to those who will use these
+		templates. It is divided in two parts, depending on a person's role in the writing process.
+	\end{abstract}
+	
+	\tableofcontents
+		
+	\section{For authors}
+		\label{sec:auteurs}		
+		
+		\subsection{Files included in the package}
+		
+			On opening the package's archive file, you'll find the following structure:
+			
+			\begin{repertoires}
+				\item \textbf{actuecon}
+				\begin{repertoires}
+					\item \textbf{doc}: documentation directory
+					\item \textbf{img}: graphics and images directory
+				\end{repertoires}
+				\begin{fichiers}
+					\item \textbf{actuecon.cls}: document class file
+					\item \textbf{bibliographie.bib}: references file
+					\item \textbf{econometrica.bst}: english bibliography style
+					\item \textbf{econometrica-fr.bst}: french bibliography style
+					\item \textbf{template-en.tex}: english template file
+					\item \textbf{template-fr.tex}: french template file
+				\end{fichiers}
+			\end{repertoires}
+		
+			Using this package is pretty straightforward:
+			
+			\begin{itemize}
+				\item You write your article in your language's template file 
+					(\textbf{template-en.tex} or \textbf{template-fr.tex});
+				\item Your write your bibliographic references in \textbf{Bib\TeX} format in the
+					\textbf{bibliographie.bib} file;
+				\item You save all your graphics and images in the \textbf{img/} directory.
+			\end{itemize}
+	
+		\subsection{How to use the template file}
+		
+			This section explains the template file's usage, from the first to (almost) the last line.
+			
+			\subsubsection{The document class}
+			
+				The template file uses the \textbf{actuecon} document class, as you can see it in the
+				\cmd{documentclass} command:
+				
+				\begin{shaded*}
+					\verb|\documentclass[10pt,twoside,fleqn,french,english]{actuecon}|
+				\end{shaded*}
+			
+				This class, based on the \textbf{article} class, was built to fully comply with the journal's
+				presentation standards. \textbf{You must not modify the options} in the \cmd{documentclass}
+				command nor in the \textbf{actuecon.cls} document class file.
+				
+			\subsubsection{The class' required packages}
+			
+				In the template's preamble, you will find the list of all required packages needed to use
+				the \textbf{actuecon} document class and the templates. These packages are
+				\textbf{already loaded} in the class file. There is no need to load them in the template file.
+				
+				When using packages for your article's purpose, please make sure that there is no
+				compatibility issues with the class' packages.
+				
+			\subsubsection{Article metadata}
+			
+				The only metadata that you'll need to enter in the template file are the title
+				(\cmd{AEtitre} command), the authors' list (\cmd{author} command)
+				and their affiliation to an institution (\cmd{affil} command).
+				
+				You can add as many authors and affiliations as is necessary, as long as you alternate
+				between \cmd{author} and \cmd{affil} commands.
+				
+				All the other article's metadata (volume, issue number, publication date and revisers) have
+				to be entered by the journal's staff.
+				
+			\subsubsection{The article's body}
+			
+				The article's different sections are clearly defined using comments. Write your article
+				while following these guidelines:
+				
+				\begin{itemize}
+					\item Write your french and english \textbf{abstracts} in the \texttt{AEresume} and
+						\texttt{AEabstract} environments.
+					\item Write your \textbf{introduction}, your \textbf{main content} and your \textbf{conclusion} 
+						in their respective section, making sure not to delete the \dec{AEintroduction},
+						\dec{AEsectionsDeveloppement}, \dec{AEconclusion} and \dec{AEbibliographie} commands.
+					\item In your article's sectioning hierarchy, do not go beyond the subsubsection.
+				\end{itemize}
+			
+			\subsubsection{Bibliography}
+			
+				The package comes with two bibliography style files : \textbf{econometrica.bst} and 
+				\textbf{econometrica-fr.bst}. These correspond to the english and french versions
+				of the bibliography style used by the journal for references. You have to use either one
+				of them, depending of the default language of your article.
+	
+	\section{For the journal's staff}
+		\label{sec:personnel}
+		
+		This section explains what the journal staff has to do in order to work on an author's draft.
+		
+		\subsection{The document class}
+		
+			An ``editorial'' choice was made to separate the content from the container in the journal's
+			article templates. Probabilities being high that an author will add his own packages, commands
+			and environments, it was important to separate his customizations from the journal's in order
+			to preserve the article's layout.
+			
+			This is why the \textbf{actuecon} document class was built : all of the article's layout is there.
+			
+			An author will only have to provide his template and references files, as well as his \texttt{img} folder
+			as source code. You will be able to compile an article with a ``vanilla'' version of the class, and as such,
+			you will make sure that the article meets all the presentation standards.
+			
+		\subsection{Article metadata}
+		
+			The draft's author having already entered the article's title, authors' list and affiliations, all you have
+			to enter is the metadata related to the journal issue number.
+			
+			In the template's preamble, you'll find the \cmd{AEvolume} and \cmd{AEnumero} commands in which you must enter
+			the volume and issue number of the journal to be published.
+			
+			The \cmd{AEdateParution} is used to enter the journal's \textbf{publication date}. It doesn't
+			require a particular date format. It is just a plain text ``field'' in which you can enter a date as you see fit
+			(``march-june 2017'', for example).
+			
+			The \cmd{date} command \textbf{must always stay empty} if you don't wan't another date to show up 
+			in the title section -- try it out by inserting a date in the command to see what it does if you don't
+			leave it blank.
+			
+			In the \textbf{document body}, you must enter the article's \textbf{first page} number in the
+			\cmd{setcounter} command, as you can see it in the following example.
+			
+			\begin{shaded*}
+				\begin{verbatim}
+					% Article beginning at page 3.
+					\setcounter{page}{3}
+				\end{verbatim}
+			\end{shaded*}
+			
+			This is necessary due to the fact that it is pretty difficult to merge many \LaTeX\ documents written
+			by as many authors into one document without running into compatibility issues. At the end of the
+			revision process, each document must be recompiled with its definitive first page number.
+			
+		\subsection{Draft revision}
+		
+			Revisers must first enter their name and initials in the \cmd{AEreviseur} command found in the draft's
+			preamble, as you can see it in the following example. There can be as many revisers as necessary as
+			long as there is a \cmd{AEreviseur} command for each one.
+			
+			\begin{shaded*}
+				\verb|\AEreviseur{Benoit Hamel}{BH}|
+			\end{shaded*}
+		
+			The revision process is made possible with the \LaTeX\ \emph{changes} package. It was made to
+			copy Microsoft Word's behaviour in document revision. You can read the package's
+			\lien{http://mirrors.ctan.org/macros/latex/contrib/changes/changes.english.pdf}{whole documentation}
+			if you wish.
+			
+			In this documentation, we'll only look at three commands:
+			
+			\begin{itemize}
+				\item \dec{added} to add text;
+				\item \dec{deleted} to delete text;
+				\item \dec{replaced} to replace text.
+			\end{itemize}
+		
+			\subsubsection{Adding text}
+			
+				The \cmd{added} command has the following syntax:
+				
+				\begin{shaded*}
+					\verb|\added[id=<initials>, remark=<remark>]{new text}|
+				\end{shaded*}
+			
+				Reviser initials and the remark are optional. However, initials are useful for a reviser's
+				identification in the case where there are more than one -- a draft's author can himself
+				be a ``reviser''. Remarks must be short. The text to be added must be written between the
+				curly braces, like in the following example.
+				
+				\begin{shaded*}
+					\begin{verbatim}
+						Ad aliquet amet commodo convallis dictum dignissim eu facilisis 
+						faucibus fermentum hendrerit himenaeos inceptos massa ornare 
+						purus quis risus sapien senectus taciti tempor torquent turpis 
+						ultrices varius velit vestibulum.
+						\added[id=BH]{Alea jacta est!}
+					\end{verbatim}
+				\end{shaded*}
+			
+				\begin{leftbar}
+					Ad aliquet amet commodo convallis dictum dignissim eu facilisis 
+					faucibus fermentum hendrerit himenaeos inceptos massa ornare 
+					purus quis risus sapien senectus taciti tempor torquent turpis 
+					ultrices varius velit vestibulum.
+					\added[id=BH]{Alea jacta est!}
+				\end{leftbar}
+			
+			\subsubsection{Deleting text}
+			
+				The \cmd{deleted} command has the following syntax:
+				
+				\begin{shaded*}
+					\begin{verbatim}
+						\deleted[id=<initials>, remark=<remark>]{deleted text}
+					\end{verbatim}
+				\end{shaded*}
+			
+				For the command to work properly, you must cut and paste the text that will be deleted
+				in the curly braces, like in the following example.
+				
+				\begin{shaded*}
+					\begin{verbatim}
+						The \deleted[id=BH]{failing} @nytimes set \deleted[id=BH]{%
+						liddle'} Bob Corker up by recording his conversation. 
+						Was \deleted[id=BH]{made to sound} a fool and that's what 
+						I am dealing with!
+					\end{verbatim}
+				\end{shaded*}
+			
+				\begin{leftbar}
+					The \deleted[id=BH]{failing} @nytimes set \deleted[id=BH]{liddle'} Bob Corker 
+					up by recording his conversation. 
+					Was \deleted[id=BH]{made to sound} a fool and that's what 
+					I am dealing with!
+				\end{leftbar}
+			
+			\subsubsection{Replacing text}
+			
+				The \cmd{replaced} command has the following syntax:
+				
+				\begin{shaded*}
+					\begin{verbatim}
+						\replaced[id=<initials>, remark=<remark>]{new text}{%
+						    old text}
+					\end{verbatim}
+				\end{shaded*}
+			
+				Like the \cmd{deleted} command, you must cut and paste the text to be replaced in
+				the second pair of curly braces and write the new text in the first pair. The
+				following example shows how to use the command.
+				
+				\begin{shaded*}
+					\begin{verbatim}
+						Democrat congresswoman totally \replaced[id=BH]{quoted}{%
+						fabricated} what I said to the wife of a soldier who died
+						in action (and \replaced[id=BH]{she has}{I have} proof).
+					\end{verbatim}
+				\end{shaded*}
+			
+				\begin{leftbar}
+					Democrat congresswoman totally \replaced[id=BH]{quoted}{%
+					fabricated} what I said to the wife of a soldier who died
+					in action (and \replaced[id=BH]{she has}{I have} proof).
+				\end{leftbar}
+			
+\end{document}

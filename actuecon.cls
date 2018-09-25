@@ -186,8 +186,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Titre de l'article
-\newcommand{\AEtitre}[1]{%
-	\title{\MakeUppercase{#1}}%
+\newcommand{\AEtitre}[2]{%
+	\title{\MakeUppercase{#1}#2}%
 	\renewcommand{\AEINTtitre}{#1}
 }
 

@@ -294,7 +294,7 @@ FUNCTION {format.names}
           namesleft #1 >
             { ", " * t * }
             {
-              ", " *
+              " " *
               t "others" =
                 { " et~al." * }
                 { fr.and * t * }	
@@ -379,7 +379,7 @@ FUNCTION {format.title}
 { title empty$
     { "" }
     { title
-      "``" swap$ * ",'' " *
+      "\og{}" swap$ * ",\fg{} " *
     }
 no.comma 'output.state :=   %%%KCB:
   if$
@@ -927,33 +927,20 @@ FUNCTION {chop.word}
 %%%KCB:  Change format of labels:
 FUNCTION {format.lab.names}
 { 's :=
-  #1 'nameptr :=
   s num.names$ 'numnames :=
-  numnames 'namesleft :=
-    { namesleft #0 > }
-    { s nameptr "{vv~}{ll}" format.name$ 't :=
-      nameptr #1 >
-	{ namesleft #1 >
-	    { ", " * t * }
-	    { numnames #2 >
-		{ "," * }
-		'skip$
-	      if$
-	      t "others" =
-		{ " et~al." * }
-		{ fr.and * t * }
-	      if$
-	    }
-	  if$
-	}
-	't
+  s #1 "{vv~}{ll}" format.name$
+  numnames #1 >
+    { s #2 "{vv~}{ll}" format.name$ 't :=
+      numnames #2 >
+      t "others" =
+      or
+        { " {\it et~al.}" * }
+        { " et " * t * }
       if$
-      nameptr #1 + 'nameptr :=
-      namesleft #1 - 'namesleft :=
     }
-  while$
+    'skip$
+  if$
 }
-
 %%%KCB: removed FUNCTION {format.long.lab.names}
 
 FUNCTION {author.key.label}
@@ -1046,7 +1033,7 @@ FUNCTION {sort.format.names}
       "{vv{ } }{ll{ }}{  f{ }}{  jj{ }}"
       format.name$ 't :=
       nameptr numnames = t "others" = and
-        { "et al" * }
+        { "et al." * }
         { t sortify * }
       if$
       nameptr #1 + 'nameptr :=

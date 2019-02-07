@@ -1,6 +1,6 @@
 %
 % template-fr.tex
-% Copyright 2018 HEC Montréal
+% Copyright 2018-2019 HEC Montréal
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3c
@@ -45,7 +45,10 @@
 % - mathptmx											  %
 % - graphicx											  %
 % - caption												  %
+% - upgreek												  %
+% - nowidow												  %
 % - changes												  %
+% - hyphenat											  %
 %														  %
 % Il n'est pas nécessaire de les charger à nouveau.		  %
 % ------------------------------------------------------- %
@@ -61,8 +64,10 @@
 % ce qui est nécessaire.
 
 % FORMAT DE BASE DE LA COMMANDE \AEtitre
-% \AEtitre{titre}{remerciements}
-\AEtitre{Titre de l'article}{\thanks{Supprimez cette commande si elle n'est pas nécessaire.}}
+% \AEtitre{titre court}{titre long}{remerciements}
+\AEtitre{Titre court de l'article}%
+		{Titre long de l'article}%
+		{\thanks{Supprimez cette commande si elle n'est pas nécessaire.}}
 \author{Premier Auteur}
 \affil{Affiliation du premier auteur}
 \author{Deuxième Auteur}
@@ -75,6 +80,7 @@
 % Numéro de la revue
 \AEnumero{}
 % Date de parution de la revue
+% Inscrivez le nom du mois en lettres minuscules.
 \AEdateParution{}
 \date{} % À LAISSER VIDE!
 
@@ -85,8 +91,19 @@
 
 \begin{document}
 	
+	%% DÉBUT CONFIGURATION DE L'ARTICLE
+	%% AUTEURS : NE TOUCHEZ PAS À CETTE SECTION
+	
+	% Empêche la césure du dernier mot d'un paragraphe
+	\finalhyphendemerits=200000
+	% Formate les captions des tableaux et figures
+	\captionsetup[table]{format=actuecon}
+	\captionsetup[figure]{format=actuecon}
+	
 	% PERSONNEL DE LA REVUE : SAISISSEZ LE NUMÉRO DE LA PREMIÈRE PAGE DE L'ARTICLE
 	\setcounter{page}{3}
+	
+	%% FIN CONFIGURATION DE L'ARTICLE
 	
 	% Génération de la section du titre de l'article
 	\maketitle

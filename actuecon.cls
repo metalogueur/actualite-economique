@@ -1,6 +1,6 @@
 %
 % actuecon.cls
-% Copyright 2018 HEC Montréal
+% Copyright 2018-2019 HEC Montréal
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3c
@@ -28,7 +28,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{actuecon}[2018/09/06 v1.0 Classe pour les articles de la revue Actualite economique]
+\ProvidesClass{actuecon}[2019/02/07 v1.1 Classe pour les articles de la revue Actualite economique]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ExecuteOptions{10pt} % Taille par défaut
 \ProcessOptions
@@ -53,7 +53,7 @@
 %% Entêtes et pieds de pages personnalisés					
 \RequirePackage{fancyhdr}
 %% Titres de section personnalisés					
-\RequirePackage{titlesec}
+\RequirePackage[raggedright]{titlesec}
 %% Nécessaire pour hacker \maketitle (à insérer avant authblk)					
 \RequirePackage{titling}
 %% Nécessaire pour hacker \maketitle					
@@ -68,12 +68,19 @@
 \RequirePackage{graphicx}
 %% Descriptions de graphiques et tableaux personnalisées
 \RequirePackage[format=plain,%
-	labelsep=newline,%
+	labelsep=none,%
 	textfont=sc,%
 	aboveskip=12pt,%
-	position=top]{caption}
+	position=top,%
+	justification=centering]{caption}
+%% Utilisation des lettres grecques droites en mode mathématiques
+\RequirePackage{upgreek}
+%% Suppression des lignes orphelines
+\RequirePackage[defaultlines=2,all]{nowidow}
 %% Révision des manuscrits
 \RequirePackage{changes}
+%% Gestion des césures
+\RequirePackage{hyphenat}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% MISE EN PAGE / LAYOUT %%
@@ -96,6 +103,8 @@
 \setlength{\mathindent}{15pt}
 %% Espacement entre l'auteur et son affiliation
 \setlength{\affilsep}{0pt}
+%% Espacement entre les références bibliographiques
+\setlength{\bibsep}{2pt}
 
 %% Reformatage de la taille de caractères \normalsize
 \makeatletter
@@ -109,6 +118,9 @@
 
 %% Formatage de la taille de caractères pour l'auteur
 \renewcommand{\Authfont}{\fontsize{10}{12}\selectfont}
+
+%% Formatage des captions maison
+\DeclareCaptionFormat{actuecon}{#1#2\leavevmode \\[6pt]#3}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PERSONNALISATION DES ENTÊTES ET DES PIEDS DE PAGES %%
@@ -186,9 +198,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Titre de l'article
-\newcommand{\AEtitre}[2]{%
-	\title{\MakeUppercase{#1}#2}%
+\newcommand{\AEtitre}[3]{%
 	\renewcommand{\AEINTtitre}{#1}
+	\title{\MakeUppercase{#2}#3}%
 }
 
 % Volume de la revue
@@ -216,8 +228,8 @@
 	\setcounter{secnumdepth}{0}
 	\titleformat{\section}%
 	{\fontsize{10}{12}\selectfont\scshape}%
-	{}{0pt}%
-	{}{}
+	{}{0pt}{}
+	\titlespacing{\section}{0pt}{0pt}{0pt}
 	\section{Introduction}
 }
 
@@ -226,8 +238,8 @@
 	\setcounter{secnumdepth}{0}
 	\titleformat{\section}%
 	{\fontsize{10}{12}\selectfont\scshape}%
-	{}{0pt}%
-	{}{}
+	{}{0pt}{}
+	\titlespacing{\section}{0pt}{0pt}{0pt}
 	\section{Conclusion}
 }
 
@@ -236,21 +248,22 @@
 	\setcounter{secnumdepth}{3}
 	\titleformat{\section}%
 	{\fontsize{10}{12}\selectfont\scshape}%
-	{\thesection.}{6pt}%
-	{}{}
+	{\thesection.}{6pt}{}
+	\titlespacing{\section}{0pt}{3.5mm}{0pt}
 	\titleformat{\subsection}%
 	{\fontsize{10}{12}\selectfont\itshape}%
-	{{\normalfont\thesubsection}}{6pt}%
-	{}{}
+	{{\normalfont\thesubsection}}{6pt}{}
+	\titlespacing{\subsection}{0pt}{6pt}{0pt}
 	\titleformat{\subsubsection}%
 	{\fontsize{10}{12}\selectfont\itshape}%
-	{{\normalfont\thesubsubsection}}{6pt}%
-	{}{}
+	{{\normalfont\thesubsubsection}}{6pt}{}
+	\titlespacing{\subsubsection}{0pt}{6pt}{0pt}
 }
 
 % Section Bibliographie de l'article
 \newcommand{\AEbibliographie}{%
-	\titleformat{\section}{\filcenter\scshape}{}{}{}{}
+	\titleformat{\section}{\filcenter\scshape}{}{}{}
+	\titlespacing{\section}{0pt}{3.5mm}{0pt}
 }
 
 % Défition des réviseurs du manuscrit

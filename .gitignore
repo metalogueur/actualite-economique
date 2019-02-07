@@ -7,4 +7,7 @@
 *.out
 *.soc
 *.toc
+*.loc
 *.synctex.gz
+todo-list.txt
+specifications-AE.pdf

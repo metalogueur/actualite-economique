@@ -1,6 +1,6 @@
 %
 % template-en.tex
-% Copyright 2018 HEC Montréal
+% Copyright 2018-2019 HEC Montréal
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3c
@@ -45,7 +45,10 @@
 % - mathptmx											   %
 % - graphicx											   %
 % - caption												   %
+% - upgreek												   %
+% - nowidow												   %
 % - changes												   %
+% - hyphenat											   %
 %														   %
 % There is no need to load them hereafter.				   %
 % -------------------------------------------------------- %
@@ -61,8 +64,10 @@
 % is necessary.
 
 % \AEtitre COMMAND BASIC SYNTAX
-% \AEtitre{title}{thanks}
-\AEtitre{Article Title}{\thanks{Delete this command if not needed.}}
+% \AEtitre{short title}{long title}{thanks}
+\AEtitre{Article Short Title}%
+		{Article Long Title}%
+		{\thanks{Delete this command if not needed.}}
 \author{First Author}
 \affil{First Author's Affiliation}
 \author{Second Author}
@@ -75,6 +80,7 @@
 % Issue Number
 \AEnumero{}
 % Journal Issue Date
+% Write the issue date's month in lowercase.
 \AEdateParution{}
 \date{} % LEAVE EMPTY!
 
@@ -83,8 +89,19 @@
 
 \begin{document}
 	
+	%% START ARTICLE CONFIGURATION
+	%% AUTHORS: DO NOT TOUCH THIS SECTION
+	
+	% Prevents the hyphenation of a paragraph's last word
+	\finalhyphendemerits=200000
+	% Formats tables' and figures' captions
+	\captionsetup[table]{format=actuecon}
+	\captionsetup[figure]{format=actuecon}
+	
 	% JOURNAL STAFF: WRITE THE ARTICLE'S FIRST PAGE NUMBER
 	\setcounter{page}{3}
+	
+	%% END ARTICLE CONFIGURATION
 	
 	% Article title generation
 	\maketitle

@@ -157,7 +157,8 @@
 				
 				\begin{itemize}
 					\item Rédigez vos \textbf{résumés}  français et anglais dans les environnements \texttt{AEresume} et
-						\texttt{AEabstract} respectivement.
+						\texttt{AEabstract} respectivement, sans laisser d'espaces entre les commandes \cmd{begin} et 
+						\cmd{end} et votre texte de résumé.
 					\item Rédigez votre \textbf{introduction}, votre \textbf{développement} et votre \textbf{conclusion} dans les sections prévues
 						à cet effet en veillant à ne pas supprimer les commandes \dec{AEintroduction},
 						\dec{AEsectionsDeveloppement}, \dec{AEconclusion} et \dec{AEbibliographie}.
@@ -170,6 +171,16 @@
 				\textbf{econometrica-fr.bst}. Ceux-ci correspondent aux versions anglaise et française du style utilisé
 				par la revue pour la mise en forme des références bibliographiques. Vous devez donc obligatoirement utiliser
 				l'un ou l'autre des styles en fonction de la langue de rédaction.
+				
+		\subsection{Particularités éditoriales à prendre en compte}
+		
+			\subsubsection{Lettres grecques en mode mathématiques}
+			
+			Selon les spécifications du Studio de design graphique de HEC Montréal, les lettres grecques doivent
+			être écrites en lettres droites et non pas italiques. Pour répondre à cette exigence, la classe de
+			document \textbf{actuecon} utilise le paquetage \lien{http://mirrors.ctan.org/macros/latex/contrib/was/upgreek.pdf}{upgreek}.
+			Veuillez consulter la documentation du paquetage afin de remplacer les commandes traditionnelles
+			des lettres grecques par celles de \textbf{upgreek}.
 	
 	\section{Pour le personnel de la revue}
 		\label{sec:personnel}
@@ -201,7 +212,8 @@
 			La \textbf{date de parution} de la revue doit être inscrite dans la commande \cmd{AEdateParution}. Cette commande ne requiert
 			pas de
 			format de date particulière; il s'agit plutôt d'un «champ» en texte libre. Vous pouvez donc inscrire la date comme
-			vous l'entendez («mars-juin 2017», par exemple).
+			vous l'entendez («mars-juin 2017», par exemple). D'après les spécifications du Studio de design graphique, vous devez
+			\textbf{écrire le mois de parution en lettres minuscules}.
 			
 			La commande \cmd{date} doit \textbf{toujours rester vide}, et ce, afin d'empêcher l'affichage d'une date dans l'espace du
 			titre de l'article -- testez-le en inscrivant une date dans la commande pour voir ce que ça donnera si vous ne laissez
@@ -218,7 +230,8 @@
 			\end{shaded*}
 			
 			Cela est nécessaire compte tenu du fait qu'il est très difficile de fusionner plusieurs documents \LaTeX\ rédigés par autant
-			d'auteurs différents dans un seul document sans que des problèmes de compatibilité surviennent. À la toute fin du processus de révision, chaque document devra donc être recompilé avec son numéro de première page définitive.
+			d'auteurs différents dans un seul document sans que des problèmes de compatibilité surviennent. À la toute fin du processus de révision, 
+			chaque document devra donc être recompilé avec son numéro de première page définitive.
 			
 		\subsection{Révision d'un manuscrit}
 		
@@ -329,5 +342,46 @@
 					fabricated} what I said to the wife of a soldier who died
 					in action (and \replaced[id=BH]{she has}{I have} proof).
 				\end{leftbar}
+			
+		\subsection{Particularités éditoriales à prendre en compte}
+		
+			Les particularités suivantes sont toutes dictées par le Studio de design graphique.
+			Il importe donc de les suivre afin d'accélérer le processus de publication.
+		
+			\subsubsection{Entêtes des pages d'un article}
+			
+			Le titre d'un article ne peut pas s'étendre sur plus d'une ligne. Lorsque cela se produit,
+			il faut \textbf{tronquer le titre court} de la commande \cmd{AEtitre} afin qu'il se limite
+			à une ligne.
+			
+			\subsubsection{Équations en blocs à l'intérieur d'une phrase}
+			
+			Il peut arriver qu'un auteur rédige une équation en bloc (c'est-à-dire à l'intérieur d'un
+			environnement) alors que son équation se trouve en plein milieu d'une phrase. Cela a pour effet
+			d'isoler l'équation dans un bloc et de couper le paragraphe et la phrase en deux.
+			
+			\LaTeX\ considérant qu'un nouveau paragraphe commence à la suite de l'équation, il indentera
+			la première ligne du «nouveau» paragraphe. \textbf{Cette ligne ne doit pas être indentée}.
+			Pour retirer l'indentation de la ligne, il suffit de la précéder de la commande \dec{noindent}.
+			
+			\subsubsection{Casse des noms des auteurs d'un article}
+		
+			Le nom de famille des auteurs d'un article doit être affiché en lettres majuscules dans le bloc de titre
+			de l'article. Si les auteurs ont inscrit leur nom de famille avec la seule première lettre en majuscule,
+			il importe que vous modifiiez la casse du nom vous-mêmes.
+			
+			\subsubsection{Césure dans les noms propres des citations}
+		
+			Lorsqu'une citation est insérée dans le texte, les noms propres ne doivent pas être coupés à
+			la fin d'une ligne. Si un tel cas se présente, vous devez insérer la citation dans la
+			commande \cmd{nohyphens} du package \textbf{hyphenat} chargé dans le fichier de la classe. La
+			citation sera alors reformatée sans césure.
+			
+			\subsubsection{Police de caractères des liens URL}
+			
+			Certains auteurs utiliseront la commande \cmd{url} pour insérer des liens URL dans leur document.
+			Cette commande affiche les liens avec une police à \texttt{largeur fixe}. Les liens devant
+			conserver la même police que le reste du texte, vous devrez substituer la commande
+			\verb|\href{URL}{text}| à \cmd{url}.
 			
 \end{document}

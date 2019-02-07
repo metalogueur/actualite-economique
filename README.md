@@ -5,7 +5,7 @@ to write journal articles for [_L'Actualité économique_](http://expertise.hec.
 
 ## License
 
-Copyright 2018 HEC Montréal
+Copyright 2018-2019 HEC Montréal
 
 This work may be distributed and/or modified under the
 conditions of the LaTeX Project Public License, either version 1.3c

@@ -153,7 +153,8 @@
 				
 				\begin{itemize}
 					\item Write your french and english \textbf{abstracts} in the \texttt{AEresume} and
-						\texttt{AEabstract} environments.
+						\texttt{AEabstract} environments, making sure not to leave blank lines between
+						the \cmd{begin} and \cmd{end} commands and your abstract's text.
 					\item Write your \textbf{introduction}, your \textbf{main content} and your \textbf{conclusion} 
 						in their respective section, making sure not to delete the \dec{AEintroduction},
 						\dec{AEsectionsDeveloppement}, \dec{AEconclusion} and \dec{AEbibliographie} commands.
@@ -166,6 +167,17 @@
 				\textbf{econometrica-fr.bst}. These correspond to the english and french versions
 				of the bibliography style used by the journal for references. You have to use either one
 				of them, depending of the default language of your article.
+				
+		\subsection{Editorial details to consider}
+		
+			\subsubsection{Greek letters in math mode}
+			
+			According to the presentation standards written by HEC Montréal's 
+			\emph{Studio de design graphique}, greek letters must be written upright, not in italics. To comply
+			with this standard, the \textbf{actuecon} document class uses the
+			\lien{http://mirrors.ctan.org/macros/latex/contrib/was/upgreek.pdf}{upgreek} package. Please read
+			the package's documentation in order to replace the traditional greek letter commands by \textbf{upgreek}'s
+			commands.
 	
 	\section{For the journal's staff}
 		\label{sec:personnel}
@@ -195,7 +207,8 @@
 			
 			The \cmd{AEdateParution} is used to enter the journal's \textbf{publication date}. It doesn't
 			require a particular date format. It is just a plain text ``field'' in which you can enter a date as you see fit
-			(``march-june 2017'', for example).
+			(``march-june 2017'', for example). As per the presentation standards written by the 
+			\emph{Studio de design graphique}, you \textbf{must write the publication date's month in lowercase}.
 			
 			The \cmd{date} command \textbf{must always stay empty} if you don't wan't another date to show up 
 			in the title section -- try it out by inserting a date in the command to see what it does if you don't
@@ -326,5 +339,48 @@
 					fabricated} what I said to the wife of a soldier who died
 					in action (and \replaced[id=BH]{she has}{I have} proof).
 				\end{leftbar}
+			
+		\subsection{Editorial guidelines to consider}
+		
+			The following editorial guidelines are imposed by the 
+			\emph{Studio de design graphique}. You have to follow these guidelines
+			in order to accelerate the publication process.
+			
+			\subsubsection{Article's page headers}
+			
+			An article's title cannot be longer than one line in the pages' headers.
+			When an article's title is too long, you will have to truncate the 
+			\textbf{short title argument} of the \cmd{AEtitre} command so it fits in
+			one line.
+			
+			\subsubsection{Block equations inside a sentence}
+			
+			It can happen that an author writes a block equation (meaning inside of an environment) in the
+			middle of a sentence. Doing so, it isolates the equation and splits the paragraph and the 
+			sentence in two parts.
+			
+			\LaTeX\ will consider that a new paragraph starts right after the equation and will indent
+			that ``new'' paragraph's first line. \textbf{This line cannot be indented}. To remove the
+			indentation, just insert the \dec{noindent} command before the line.
+			
+			\subsubsection{Font case for an article's authors' last names}
+			
+			An article's authors' last names must be typed in uppercase in the article title block. If authors
+			have written their last name with only the first letter in uppercase, you must manually retype
+			the last names in uppercase.
+			
+			\subsubsection{Proper nouns hyphenation in citations}
+			
+			When a citation is inserted in the text, proper nouns cannot be hyphenated at the end of a
+			line. If you see such a case, you have to embed the citation command in the
+			\cmd{nohyphens} command provided by the \textbf{hyphenat} package, which is preloaded in the
+			class file. The citation will then be reformatted without hyphenation.
+			
+			\subsubsection{Font for URL links} 
+			
+			Some authors will use the \cmd{url} command to insert URL links in their document. This command
+			types links with a \texttt{fixed width} font. URL links must be typed in the same font as the rest
+			of the document, so you'll have to change all \cmd{url} commands for the \verb|\href{URL}{text}| 
+			command.
 			
 \end{document}

@@ -449,7 +449,7 @@ FUNCTION {format.bvolume}
     { "vol." volume tie.or.space.connect
       series empty$
         'skip$
-        { " of " * series emphasize * }
+        { " de " * series emphasize * }
       if$
       "volume and number" number either.or.check
     }
@@ -601,7 +601,7 @@ FUNCTION {format.book.crossref}
       word.in
     }
     { "vol." volume tie.or.space.connect
-      " of " *
+      " de " *
     }
   if$
   "\cite{" * crossref * "}" *
@@ -820,7 +820,7 @@ FUNCTION {phdthesis}
   author format.key output
   format.date "year" output.check
   format.title "title" output.check
-  "Thèse de \uppercase{d}octorat" format.thesis.type output.nonnull
+  "Th\`{e}se de \uppercase{d}octorat" format.thesis.type output.nonnull
   school "school" output.check
   address output
   note output
@@ -890,7 +890,7 @@ MACRO {oct} {"Octobre"}
 
 MACRO {nov} {"Novembre"}
 
-MACRO {dec} {"Decembre"}
+MACRO {dec} {"Décembre"}
 
 %%%KCB: removed computer science journal macros
 %%%KCB: added following macros for editions

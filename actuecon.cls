@@ -28,7 +28,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{actuecon}[2019/02/07 v1.1 Classe pour les articles de la revue Actualite economique]
+\ProvidesClass{actuecon}[2019/02/11 v1.1.1 Classe pour les articles de la revue Actualite economique]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ExecuteOptions{10pt} % Taille par défaut
 \ProcessOptions
@@ -258,6 +258,15 @@
 	{\fontsize{10}{12}\selectfont\itshape}%
 	{{\normalfont\thesubsubsection}}{6pt}{}
 	\titlespacing{\subsubsection}{0pt}{6pt}{0pt}
+}
+
+% Section des annexes
+\newcommand{\AEannexe}{%
+	\titleformat{\section}{\filcenter\scshape}{}{}{}
+	\titlespacing{\section}{0pt}{3.5mm}{0pt}
+	\section{ANNEXE}
+	\AEsectionsDeveloppement
+	\appendix
 }
 
 % Section Bibliographie de l'article

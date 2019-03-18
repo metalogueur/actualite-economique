@@ -297,7 +297,7 @@ FUNCTION {format.names}
               " " *
               t "others" =
                 { " et~al." * }
-                { fr.and * t * }	
+                { "\textup{" * fr.and * "} " * t * } % Modification par Benoit Hamel
               if$
             }
           if$
@@ -328,7 +328,7 @@ FUNCTION {format.names.ed}
               ", " *
               t "others" =
                 { " et~al." * }
-                { fr.and * t * }	
+                { "\textup{" * fr.and * "} " * t * } % Modification par Benoit Hamel	
               if$
             }
           if$
@@ -379,7 +379,7 @@ FUNCTION {format.title}
 { title empty$
     { "" }
     { title
-      "\og{}" swap$ * ",\fg{} " *
+      "\og{}" swap$ * "\fg{}, " *
     }
 no.comma 'output.state :=   %%%KCB:
   if$

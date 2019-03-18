@@ -105,6 +105,8 @@
 \setlength{\affilsep}{0pt}
 %% Espacement entre les références bibliographiques
 \setlength{\bibsep}{2pt}
+%% Espacement entre les notes de bas de pages
+\setlength{\footnotesep}{.8\baselineskip}
 
 %% Reformatage de la taille de caractères \normalsize
 \makeatletter
@@ -149,10 +151,19 @@
 	og=«, fg=»                     
 }
 
-%% [babel] Traductions françaises
+%% Formatage des entêtes de tableaux et figures (anglais)
+\renewcommand{\figurename}{\MakeUppercase{\figurename}}
+\renewcommand{\tablename}{\MakeUppercase{\tablename}}
+
+%% [babel] Mise en forme de labels
 \addto\captionsfrench{%
 	\renewcommand{\figurename}{\MakeUppercase{Graphique}}
 	\renewcommand{\tablename}{\MakeUppercase{Tableau}}
+	\renewcommand{\refname}{BIBLIOGRAPHIE}
+}
+\addto\captionsenglish{%
+	\renewcommand{\figurename}{\MakeUppercase{Figure}}
+	\renewcommand{\tablename}{\MakeUppercase{Table}}
 	\renewcommand{\refname}{BIBLIOGRAPHIE}
 }
 
@@ -239,7 +250,7 @@
 	\titleformat{\section}%
 	{\fontsize{10}{12}\selectfont\scshape}%
 	{}{0pt}{}
-	\titlespacing{\section}{0pt}{0pt}{0pt}
+	\titlespacing{\section}{0pt}{3.5mm}{0pt}
 	\section{Conclusion}
 }
 
@@ -265,6 +276,14 @@
 	\titleformat{\section}{\filcenter\scshape}{}{}{}
 	\titlespacing{\section}{0pt}{3.5mm}{0pt}
 	\section{ANNEXE}
+	\AEsectionsDeveloppement
+	\appendix
+}
+
+\newcommand{\AEappendix}{%
+	\titleformat{\section}{\filcenter\scshape}{}{}{}
+	\titlespacing{\section}{0pt}{3.5mm}{0pt}
+	\section{APPENDIX}
 	\AEsectionsDeveloppement
 	\appendix
 }

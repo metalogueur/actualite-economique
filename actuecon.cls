@@ -148,7 +148,8 @@
 
 %% [babel] Caractères « et » sont les guillemets
 \frenchbsetup{%
-	og=«, fg=»                     
+	og=«, fg=»,
+	FrenchFootnotes=true                     
 }
 
 %% Formatage des entêtes de tableaux et figures (anglais)
@@ -240,7 +241,7 @@
 	\titleformat{\section}%
 	{\fontsize{10}{12}\selectfont\scshape}%
 	{}{0pt}{}
-	\titlespacing{\section}{0pt}{0pt}{0pt}
+	\titlespacing{\section}{0pt}{3.5mm}{0pt}
 	\section{Introduction}
 }
 

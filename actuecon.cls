@@ -165,7 +165,7 @@
 \addto\captionsenglish{%
 	\renewcommand{\figurename}{\MakeUppercase{Figure}}
 	\renewcommand{\tablename}{\MakeUppercase{Table}}
-	\renewcommand{\refname}{BIBLIOGRAPHIE}
+	\renewcommand{\refname}{BIBLIOGRAPHY}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%

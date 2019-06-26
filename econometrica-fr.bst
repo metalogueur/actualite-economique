@@ -689,7 +689,7 @@ FUNCTION {inbook}
     }
   if$
   format.date "year" output.check
-  format.btitle "title" output.check
+  format.btitle ", " * "title" output.check
   crossref missing$
     { format.bvolume output
       format.chapter.pages "chapter and pages" output.check

@@ -1197,7 +1197,7 @@ FUNCTION {inbook}
   if$
   format.date "year" output.check
   date.block
-  format.btitle "title" output.check
+  format.btitle ", " * "title" output.check
   crossref missing$
     {
       format.number.series output
